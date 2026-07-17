@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BankingEnterpriseSystem.Models.Loan>
+
+@{
+    ViewBag.Title = "Credit Register";
+}
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-12">
+        <h2 style="font-weight: 700; color: #0A2540; margin-bottom: 5px;">Credit Risk Underwriting Register</h2>
+        <p class="text-muted">System-wide log tracking automated algorithmic risk decisions.</p>
+        <hr />
+    </div>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Application ID</th>
+            <th>Customer Reference ID</th>
+            <th>Declared Salary</th>
+            <th>Requested Facility</th>
+            <th>Underwriting Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><strong>LN-000@item.LoanId</strong></td>
+                <td>Account ID: @item.CustomerId</td>
+                <td>@item.MonthlySalary.ToString("C") /mo</td>
+                <td style="font-weight: 600;">@item.LoanAmount.ToString("C")</td>
+                <td>
+                    @if (item.status == "Approved")
+                    {
+                        <span class="label label-success" style="padding: 6px 12px; font-size: 0.9em; display: inline-block;">Approved & Capital Payout Issued</span>
+                    }
+                    else
+                    {
+                        <span class="label label-danger" style="padding: 6px 12px; font-size: 0.9em; display: inline-block;">Rejected - Insufficient Capital Coverage</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p style="margin-top: 20px;">
+    @Html.ActionLink("Return to Customers Management", "Index", "Customer", null, new { @class = "btn btn-default" })
+</p>

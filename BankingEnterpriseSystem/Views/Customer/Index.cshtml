@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BankingEnterpriseSystem.Models.Customer>
+
+@{
+    ViewBag.Title = "Customer Management";
+}
+
+<h2>Customer Accounts Directory</h2>
+
+<p>
+    @Html.ActionLink("Register New Customer", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Current Balance</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Phone</td>
+            <td>@item.Email</td>
+            <td>@item.Balance.ToString("C")</td>
+            <td>
+                <a href="@Url.Action("Deposit", "Transaction", new { id = item.customerId })" class="btn btn-success btn-sm">Deposit</a>
+                <a href="@Url.Action("Withdraw", "Transaction", new { id = item.customerId })" class="btn btn-warning btn-sm">Withdraw</a>
+                <a href="@Url.Action("Apply", "Loan", new { id = item.customerId })" class="btn btn-dark btn-sm">Apply Loan</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

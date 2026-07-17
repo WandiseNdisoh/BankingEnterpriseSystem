@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Inter-Account Transfer";
+    var sender = ViewBag.Sender as BankingEnterpriseSystem.Models.Customer;
+    var recipients = ViewBag.Recipients as List<BankingEnterpriseSystem.Models.Customer>;
+}
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default" style="box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 6px; overflow: hidden;">
+            <div class="panel-heading" style="background-color: #0A2540; color: white; padding: 15px; font-weight: 600;">
+                Electronic Funds Transfer (EFT) Clearing
+            </div>
+            <div class="panel-body" style="padding: 25px;">
+
+                <div class="well" style="background-color: #F8FAFC; border-left: 4px solid #00D4B2;">
+                    <h5><strong>Origin Account (Sender):</strong></h5>
+                    <h4>@sender.Name</h4>
+                    <p style="margin-bottom: 0;"><strong>Clearing Balance:</strong> @sender.Balance.ToString("C")</p>
+                </div>
+
+                @using (Html.BeginForm("Transfer", "Transaction", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="senderId" value="@sender.customerId" />
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <!-- Recipient Selection Dropdown -->
+                    <div class="form-group">
+                        <label style="font-weight: 600; color: #1C2A38;">Select Destination Beneficiary</label>
+                        <select name="receiverId" class="form-control" required style="height: 45px;">
+                            <option value="">-- Select Registered Beneficiary --</option>
+                            @foreach (var r in recipients)
+                            {
+                                <option value="@r.customerId">@r.Name (Current Balance: @r.Balance.ToString("C"))</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Transfer Value Input -->
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label style="font-weight: 600; color: #1C2A38;">Settlement Amount (ZAR)</label>
+                        <div class="input-group">
+                            <span class="input-group-addon" style="background-color: #E2E8F0; font-weight: 600;">R</span>
+                            <input type="number" name="amount" step="0.01" class="form-control" required placeholder="0.00" style="height: 45px; font-size: 1.1em;" />
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px;">
+                        <button type="submit" class="btn btn-primary btn-block" style="height: 45px; font-weight: 600; font-size: 1.05em;">Execute Atomic Clearing</button>
+                        @Html.ActionLink("Cancel and Back", "Index", "Customer", null, new { @class = "btn btn-default btn-block", style = "margin-top: 10px;" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

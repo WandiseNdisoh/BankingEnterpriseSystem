@@ -1,0 +1,55 @@
+﻿@model BankingEnterpriseSystem.Models.Customer
+
+@{
+    ViewBag.Title = "Cash Withdrawal Outward Posting";
+}
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default" style="box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 6px; overflow: hidden;">
+            <div class="panel-heading" style="background-color: #10B981; color: white; padding: 15px; font-weight: 600;">
+                Cash Withdrawal Outward Posting
+            </div>
+            <div class="panel-body" style="padding: 25px;">
+
+                @if (Model != null)
+                {
+                    <div class="well" style="background-color: #F8FAFC;">
+                        <h4><strong>Account Holder:</strong> @Model.Name</h4>
+                        <p style="margin-bottom: 0;">
+                            <strong>Available Funds:</strong>
+                            <span style="color: #10B981; font-weight: 700;">R @Model.Balance.ToString("N2")</span>
+                        </p>
+                    </div>
+
+                    using (Html.BeginForm("Withdraw", "Transaction", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(m => m.customerId)
+
+                        <div class="form-group">
+                            <label style="font-weight: 600;">Amount to Withdraw</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">R</span>
+                                <input type="number" name="amount" step="0.01" class="form-control" required placeholder="0.00" style="height: 45px;" />
+                            </div>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-top: 10px;" })
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <button type="submit" class="btn btn-warning" style="font-weight: 600; padding: 10px 20px;">Process Withdrawal</button>
+                            <a href="@Url.Action("Index", "Customer")" class="btn btn-default" style="padding: 10px 20px; margin-left: 10px;">Cancel</a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-danger">Error: No client context was provided.</div>
+                    <a href="@Url.Action("Index", "Customer")" class="btn btn-default">Return to Customers</a>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
