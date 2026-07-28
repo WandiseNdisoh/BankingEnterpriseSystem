@@ -72,7 +72,7 @@ This type of query is useful for identifying inactive customers or newly created
 
 ### Screenshot
 
-![LEFT OUTER JOIN](docs/Images/SQL_LeftOuterJoin.png)
+![LEFT OUTER JOIN](docs/Images/SQL_LeftOuterJoin.jpeg)
 
 ---
 
