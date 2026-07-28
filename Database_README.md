@@ -56,7 +56,7 @@ This query combines records from the Customers and Transactions tables using mat
 
 ### Screenshot
 
-![INNER JOIN](docs/Images/SQL_InnerJoin.png)
+![INNER JOIN](docs/Images/SQL_InnerJoin.jpeg)
 
 ---
 
@@ -94,7 +94,7 @@ were used to analyse transaction activity and produce summary reports.
 
 ### Screenshot
 
-![GROUP BY] (docs/Images/SQL_GroupBy.png)
+![GROUP BY](docs/Images/SQL_GroupBy.jpeg)
 
 ---
 
@@ -110,7 +110,7 @@ This approach prevents partial updates during deposits or withdrawals.
 
 ### Screenshot
 
-! [Stored Procedure] (docs/Images/SQL_StoredProcedure.png)
+! [Stored Procedure](docs/Images/SQL_StoredProcedure.jpeg)
 
 ---
 
