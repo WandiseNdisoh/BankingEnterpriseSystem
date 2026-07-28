@@ -110,7 +110,7 @@ This approach prevents partial updates during deposits or withdrawals.
 
 ### Screenshot
 
-! [Stored Procedure](docs/Images/SQL_StoredProcedure.jpeg)
+![Stored Procedure](docs/Images/SQL_StoredProcedure.jpeg)
 
 ---
 
